@@ -1,0 +1,74 @@
+name: Deploy Databricks Job
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+
+      uses: actions/setup-python@v5
+
+      with:
+
+        python-version: 3.10
+
+    - name: Install Poetry
+
+      run: pip install poetry
+
+    - name: Install dependencies
+
+      run: poetry install
+
+    - name: Build wheel
+
+      run: poetry build
+
+    - name: Install Databricks CLI
+
+      run: pip install databricks-cli
+
+    - name: Configure Databricks CLI
+
+      run: |
+
+        mkdir -p ~/.databricks
+
+        cat <<EOF > ~/.databricks/config
+
+        [DEFAULT]
+
+        host = ${{ secrets.DATABRICKS_HOST }}
+
+        token = ${{ secrets.DATABRICKS_TOKEN }}
+
+        EOF
+
+    - name: Upload wheel to DBFS
+
+      run: |
+
+        databricks fs cp dist/*.whl dbfs:/tmp/databricks_data_loader.whl --overwrite
+
+    - name: Update Databricks Job
+
+      run: |
+
+        databricks jobs reset --job-id ${{ secrets.DATABRICKS_JOB_ID }} --json-file job-config.json
+ 
