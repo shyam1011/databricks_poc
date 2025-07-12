@@ -1,12 +1,17 @@
 import pandas as pd
+import os
 import databricks.sql
 
 def main():
+    
+    server_hostname=os.getenv("DATABRICKS_HOST"),
+    http_path=os.getenv("DATABRICKS_HTTP_PATH"),
+    access_token=os.getenv("DATABRICKS_TOKEN")
 
     conn = databricks.sql.connect(
-        server_hostname="adb-4477823463141297.17.azuredatabricks.net",
-        http_path="/sql/1.0/warehouses/7ae128948e05b24a",
-        access_token="dapi0fc93bcea9f033b5e119ade8f485b834-3"
+        server_hostname,
+        http_path,
+        access_token
     )
     
 
