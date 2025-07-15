@@ -4,7 +4,7 @@ version = "0.1"
 packages = [{ include = "extract_work" }]  # your source code folder
 
 [tool.poetry.dependencies]
-python = ">3.8"
+python = ">=3.9,<3.11"
 pandas = ">2.2.0"
 databricks-sql-connector = ">2.9.0"
 
