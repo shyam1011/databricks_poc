@@ -38,8 +38,10 @@ jobs:
       # Step 5: Configure Databricks CLI using secrets (ensure you store `DATABRICKS_HOST` and `DATABRICKS_TOKEN` in GitHub secrets)
       - name: Configure Databricks CLI
         run: |
-          databricks configure --token --host ${{secrets.DATABRICKS_HOST}} --token ${{secrets.DATABRICKS_TOKEN}}
-          
+          export DATABRICKS_HOST="https://adb-4477823463141297.17.azuredatabricks.net/"
+          export DATABRICKS_TOKEN="${{ secrets.DATABRICKS_TOKEN }}"
+          databricks configure --token
+
       # Step 6: Upload the .whl file to Databricks DBFS (Databricks File System)
       - name: Upload .whl file to Databricks DBFS
         run: |
