@@ -45,13 +45,13 @@ jobs:
         run: |
           WHL_FILE=$(ls dist/*.whl | head -n 1)
           WHL_NAME=$(basename "$WHL_FILE")
-          echo "Triggering Databricks job with wheel path: /FileStore/whl_poc/$WHL_NAME"
+          echo "Triggering Databricks job with wheel path: dbfs:/FileStore/whl_poc/$WHL_NAME"
           curl -X POST $DATABRICKS_HOST/api/2.0/jobs/run-now \
             -H "Authorization: Bearer $DATABRICKS_TOKEN" \
             -H "Content-Type: application/json" \
             -d "{
                   \"job_id\": 10367028338781,
                   \"notebook_params\": {
-                    \"package_path\": \"/FileStore/whl_poc/$WHL_NAME\"
+                    \"package_path\": \"dbfs:/FileStore/whl_poc/$WHL_NAME\"
                   }
                 }"
