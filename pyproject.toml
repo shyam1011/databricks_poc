@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "databricks_project"
+name = "extract_work"
 version = "0.1"
 packages = [{ include = "extract_work" }]  # your source code folder
 
