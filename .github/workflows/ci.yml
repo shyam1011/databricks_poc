@@ -11,6 +11,7 @@ jobs:
     env:
       DATABRICKS_HOST: https://adb-4477823463141297.17.azuredatabricks.net
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      PATH: $HOME/.local/bin:$PATH  # Ensures poetry available across steps
 
     steps:
       - name: Checkout code
@@ -22,17 +23,22 @@ jobs:
 
       - name: Install dependencies
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
           poetry install
 
       - name: Build .whl file
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
           poetry build --format wheel
 
       - name: Install Databricks CLI
         run: |
           pip install databricks-cli
+
+      - name: Configure Databricks CLI
+        run: |
+          databricks configure --token <<EOF
+          $DATABRICKS_HOST
+          $DATABRICKS_TOKEN
+          EOF
 
       - name: Upload .whl file to Databricks DBFS
         run: |
@@ -44,6 +50,7 @@ jobs:
         run: |
           WHL_FILE=$(ls dist/*.whl | head -n 1)
           WHL_BASENAME=$(basename "$WHL_FILE")
+          echo "Triggering Databricks job with: $WHL_BASENAME"
           curl -X POST https://adb-4477823463141297.17.azuredatabricks.net/api/2.0/jobs/run-now \
           -H "Authorization: Bearer ${{ secrets.DATABRICKS_TOKEN }}" \
           -H "Content-Type: application/json" \
