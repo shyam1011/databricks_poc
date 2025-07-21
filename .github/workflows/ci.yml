@@ -1,56 +1,49 @@
-name: Upload whl & Run
- 
+name: Upload WHL & Run Databricks Job
+
 on:
   push:
     branches:
       - main
- 
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
       DATABRICKS_HOST: https://adb-4477823463141297.17.azuredatabricks.net
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
- 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
- 
+
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
- 
+
       - name: Install dependencies
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           poetry install
- 
+
       - name: Build .whl file
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           poetry build --format wheel
- 
+
       - name: Install Databricks CLI
         run: |
           pip install databricks-cli
- 
+
       - name: Upload .whl file to Databricks DBFS
         run: |
           WHL_FILE=$(ls dist/*.whl | head -n 1)
-          echo "Uploading $WHL_FILE"
+          echo "Uploading $WHL_FILE to DBFS..."
           databricks fs cp "$WHL_FILE" "dbfs:/Workspace/Users/shyam1011@gmail.com/whl_poc/$(basename $WHL_FILE)" --overwrite
- 
+
       - name: Trigger Databricks Job
         run: |
-          WHL_FILE=$(ls dist/*.whl | head -n 1)
-          WHL_BASENAME=$(basename "$WHL_FILE")
-          curl -X POST https://adb-4477823463141297.17.azuredatabricks.net/api/2.0/jobs/run-now \
-          -H "Authorization: Bearer ${{ secrets.DATABRICKS_TOKEN }}" \
+          echo "Triggering job ID 10367028338781"
+          curl -X POST $DATABRICKS_HOST/api/2.0/jobs/run-now \
+          -H "Authorization: Bearer $DATABRICKS_TOKEN" \
           -H "Content-Type: application/json" \
-          -d "{
-                \"job_id\": 561324138644148,
-                \"notebook_params\": {
-                  \"package_path\": \"/Workspace/Users/shyam1011@gmail.com/whl_poc/$WHL_BASENAME\"
-                }
-              }"
- 
+          -d "{\"job_id\": 10367028338781}"
