@@ -34,24 +34,24 @@ jobs:
         run: |
           pip install databricks-cli
 
-      - name: Upload .whl file to DBFS at /FileStore/whl/
+      - name: Upload .whl file to DBFS at /FileStore/whl_poc/
         run: |
           WHL_FILE=$(ls dist/*.whl | head -n 1)
           WHL_NAME=$(basename "$WHL_FILE")
-          echo "Uploading $WHL_NAME to DBFS at /FileStore/whl/"
-          databricks fs cp "$WHL_FILE" "dbfs:/FileStore/whl/$WHL_NAME" --overwrite
+          echo "Uploading $WHL_NAME to DBFS at /FileStore/whl_poc/"
+          databricks fs cp "$WHL_FILE" "dbfs:/FileStore/whl_poc/$WHL_NAME" --overwrite
 
       - name: Trigger Databricks Job
         run: |
           WHL_FILE=$(ls dist/*.whl | head -n 1)
           WHL_NAME=$(basename "$WHL_FILE")
-          echo "Triggering Databricks job with wheel path: /FileStore/whl/$WHL_NAME"
+          echo "Triggering Databricks job with wheel path: /FileStore/whl_poc/$WHL_NAME"
           curl -X POST $DATABRICKS_HOST/api/2.0/jobs/run-now \
             -H "Authorization: Bearer $DATABRICKS_TOKEN" \
             -H "Content-Type: application/json" \
             -d "{
                   \"job_id\": 10367028338781,
                   \"notebook_params\": {
-                    \"package_path\": \"/FileStore/whl/$WHL_NAME\"
+                    \"package_path\": \"/FileStore/whl_poc/$WHL_NAME\"
                   }
                 }"
