@@ -21,7 +21,12 @@ job_settings = {
             "environment": {
                 "docker_image": {
                     "url": "databricksruntime/python:latest"
-                }
+                },
+                "python": {
+                "pip": [
+                    "dbfs:/tmp/dataloader-0.1.0-py3-none-any.whl"
+                ]
+            }
             }
         }
     ],
@@ -32,11 +37,6 @@ job_settings = {
                 "package_name": "dataloader",
                 "entry_point": "load_data"
             },
-            "libraries": [
-                {
-                    "whl": "dbfs:/FileStore/whl_poc/extract_work-0.1-py3-none-any.whl"
-                }
-            ],
             "environment_key": "default_env"
         }
     ]
