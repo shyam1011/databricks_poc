@@ -27,7 +27,7 @@ job_settings = {
                         "dbfs:/FileStore/whl_poc/extract_work-0.1-py3-none-any.whl"
                     ]
                 },
-                "environment_version": "14.x-photon-scala2.12"
+                "environment_version": "14.0.x-photon-scala2.12"
             }
         }
     ],
