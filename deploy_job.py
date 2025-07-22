@@ -3,6 +3,8 @@ import os
 
 server_hostname = os.getenv("DATABRICKS_HOST")
 access_token = os.getenv("DATABRICKS_TOKEN")
+print("Databricks Host:", server_hostname)
+
 
 client = WorkspaceClient(
     host=server_hostname,
