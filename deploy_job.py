@@ -26,7 +26,8 @@ job_settings = {
                 "pip": [
                     "dbfs:/tmp/dataloader-0.1.0-py3-none-any.whl"
                 ]
-            }
+                },
+            "environment_version": "13.3.x-photon-scala2.12"
             }
         }
     ],
