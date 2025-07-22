@@ -20,12 +20,7 @@ job_settings = {
             "python_wheel_task": {
                 "package_name": "dataloader",
                 "entry_point": "load_data"
-            },
-            "libraries": [
-                {
-                    "whl": "dbfs:/FileStore/whl_poc/extract_work-0.1-py3-none-any.whl"
-                }
-            ]
+            }
         }
     ]
 }
