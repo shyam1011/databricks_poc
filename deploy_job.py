@@ -31,9 +31,9 @@ task = Task(
         entry_point="load_data"
     ),
     libraries=[
-        Library(
-            whl="dbfs:/FileStore/whl_poc/extract_work-0.1-py3-none-any.whl"
-        )
+        {
+            "whl": "dbfs:/FileStore/whl_poc/extract_work-0.1-py3-none-any.whl"
+        }
     ]
 )
 
