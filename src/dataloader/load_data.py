@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import databricks.sql
 
+
 def load_data():
     # Get environment variables
     server_hostname = os.getenv("DATABRICKS_HOST")
