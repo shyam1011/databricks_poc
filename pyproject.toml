@@ -9,9 +9,10 @@ packages = [{ include = "extract_work" }]
 python = ">=3.9,<3.14"
 pandas = ">2.2.0"
 databricks-sql-connector = ">2.9.0"
+pyspark = "*"
 
 [tool.poetry.scripts]
-extract_work = "extract_work.loader:main"
+extract_work = "extract_work.data_loader:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
