@@ -16,7 +16,7 @@ job_settings = {
             "job_cluster_key": "serverless_cluster",
             "new_cluster": {
                 "spark_version": "14.0.x-scala2.12",
-                "node_type_id": "Standard_DS3_v2",
+                "node_type_id": "Serverless",
                 "num_workers": 1,
                 "data_security_mode": "SINGLE_USER",
                 "runtime_engine": "PHOTON"
