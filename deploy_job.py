@@ -31,7 +31,7 @@ job_settings = {
             },
             "libraries": [
                 {
-                    "whl": "dbfs:/FileStore/whl_poc/extract_work-0.1-py3-none-any.whl"
+                    "whl": "dbfs:/FileStore/whl_poc/dataloader-0.1-py3-none-any.whl"
                 }
             ]
         }

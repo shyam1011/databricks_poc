@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "extract_work"
+name = "dataloader"
 version = "0.1"
 description = "test poc"
 authors = ["shyam <shyam1011@gmail.com>"]
