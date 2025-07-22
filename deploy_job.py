@@ -44,7 +44,11 @@ job_settings = JobSettings(
 )
 
 # Create or update the job
-created_job = client.jobs.create(**job_settings.as_dict())
+created_job = client.jobs.create(
+    name=job_settings.name,
+    job_clusters=[jc.as_dict() for jc in job_settings.job_clusters],
+    tasks=[t.as_dict() for t in job_settings.tasks]
+)
 print(f"Created Job ID: {created_job.job_id}")
 
 
