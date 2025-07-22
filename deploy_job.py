@@ -46,7 +46,7 @@ job_settings = {
 created_job = client.api_client.do(
     "POST",
     "/api/2.1/jobs/create",
-    json=job_settings
+    body=job_settings
 )
 
 print(f"Created Job ID: {created_job['job_id']}")
