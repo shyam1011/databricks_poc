@@ -1,6 +1,6 @@
 from databricks.sdk import WorkspaceClient
 import os
-from databricks.sdk.service.jobs import JobSettings, JobCluster, Task, PythonWheelTask
+
 
 server_hostname = os.getenv("DATABRICKS_HOST")
 http_path = os.getenv("DATABRICKS_HTTP_PATH")
@@ -43,9 +43,14 @@ job_settings = {
     ]
 }
 
-created_job = client.jobs.create(**job_settings)
-print(f"Created Job ID: {created_job.job_id}")
+created_job = client.api_client.do(
+    "POST",
+    "/api/2.1/jobs/create",
+    json=job_settings
+)
+
+print(f"Created Job ID: {created_job['job_id']}")
 
 with open("job_id.txt", "w") as f:
-    f.write(str(created_job.job_id))
+    f.write(str(created_job['job_id']))
 
