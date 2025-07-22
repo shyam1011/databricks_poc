@@ -46,7 +46,7 @@ job_settings = {
 }
 
 # Create or update the job
-created_job = client.jobs.create(job_settings)
+created_job = client.jobs.create(**job_settings.as_dict())
 print(f"Created Job ID: {created_job.job_id}")
 
 
