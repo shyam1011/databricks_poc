@@ -26,8 +26,8 @@ job_settings = {
             "task_key": "load_data_task",
             "job_cluster_key": "classic_cluster",
             "python_wheel_task": {
-                "package_name": "dataloader.load_data",        # Ensure this matches your WHL's package name
-                "entry_point": "main"
+                "package_name": "dataloader",        # Ensure this matches your WHL's package name
+                "entry_point": "load_data"
             },
             "libraries": [
                 {
