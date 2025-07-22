@@ -33,7 +33,12 @@ job_settings = {
                 {
                     "whl": "dbfs:/FileStore/whl_poc/dataloader-0.1-py3-none-any.whl"
                 }
-            ]
+            ],
+            "environment_variables": {
+                "DATABRICKS_HOST": os.getenv("DATABRICKS_HOST"),
+                "DATABRICKS_HTTP_PATH": os.getenv("DATABRICKS_HTTP_PATH"),
+                "DATABRICKS_TOKEN": os.getenv("DATABRICKS_TOKEN")
+                }
         }
     ]
 }
