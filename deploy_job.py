@@ -46,9 +46,9 @@ job_settings = {
 }
 
 # Create or update the job
-created_job = client.jobs.create(**job_settings)
-
+created_job = client.jobs.create(job_settings)
 print(f"Created Job ID: {created_job.job_id}")
+
 
 # Save job ID to file
 with open("job_id.txt", "w") as f:
