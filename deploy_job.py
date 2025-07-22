@@ -1,6 +1,6 @@
 from databricks.sdk import WorkspaceClient
 import os
-from databricks.sdk.service.jobs import JobSettings
+from databricks.sdk.service.jobs import JobSettings,JobSettings, JobCluster, Task, PythonWheelTask, Library
 
 server_hostname = os.getenv("DATABRICKS_HOST")
 http_path = os.getenv("DATABRICKS_HTTP_PATH")
@@ -14,13 +14,13 @@ client = WorkspaceClient(
 
 job_cluster = JobCluster(
     job_cluster_key="serverless_cluster",
-    new_cluster=NewCluster(
+    new_cluster={
         spark_version="13.3.x-scala2.12",
         node_type_id="Serverless",
         num_workers=1,
         data_security_mode="SINGLE_USER",
         runtime_engine="PHOTON"
-    )
+    }
 )
 
 task = Task(
