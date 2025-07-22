@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import databricks.sql
 
-def main():
+def load_data():
     # Get environment variables
     server_hostname = os.getenv("DATABRICKS_HOST")
     http_path = os.getenv("DATABRICKS_HTTP_PATH")
@@ -40,4 +40,4 @@ def main():
             pass
 
 if __name__ == "__main__":
-    main()
+    load_data()

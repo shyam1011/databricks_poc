@@ -1,1 +1,1 @@
-from .load_data import main
+from .load_data import load_data
