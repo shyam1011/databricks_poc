@@ -3,7 +3,7 @@ name = "dataloader"
 version = "0.1"
 description = "test poc"
 authors = ["shyam <shyam1011@gmail.com>"]
-packages = [{ include = "src" }]
+packages = [{include = "dataloader", from = "src" }]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.14"
