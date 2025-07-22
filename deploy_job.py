@@ -17,7 +17,6 @@ job_settings = {
     "tasks": [
         {
             "task_key": "load_data_task",
-            "job_cluster_key": "serverless_cluster",
             "python_wheel_task": {
                 "package_name": "dataloader",
                 "entry_point": "load_data"
