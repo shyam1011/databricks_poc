@@ -12,15 +12,32 @@ client = WorkspaceClient(
 )
 
 
+
 job_settings = {
     "name": "DataLoader Serverless Job",
+    "environments": [
+        {
+            "environment_key": "default_env",
+            "environment": {
+                "docker_image": {
+                    "url": "databricksruntime/python:latest"
+                }
+            }
+        }
+    ],
     "tasks": [
         {
             "task_key": "load_data_task",
             "python_wheel_task": {
                 "package_name": "dataloader",
                 "entry_point": "load_data"
-            }
+            },
+            "libraries": [
+                {
+                    "whl": "dbfs:/FileStore/whl_poc/extract_work-0.1-py3-none-any.whl"
+                }
+            ],
+            "environment_key": "default_env"
         }
     ]
 }
