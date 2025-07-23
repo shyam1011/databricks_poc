@@ -39,9 +39,9 @@ job_settings = {
                 }
             ],
             "environment_variables": {
-                "DATABRICKS_HOST": server_hostname,
-                "DATABRICKS_HTTP_PATH": http_path,
-                "DATABRICKS_TOKEN": access_token 
+                "DATABRICKS_HOST": os.getenv("DATABRICKS_HOST"),
+                "DATABRICKS_HTTP_PATH": os.getenv("DATABRICKS_HTTP_PATH"),
+                "DATABRICKS_TOKEN": os.getenv("DATABRICKS_TOKEN") 
             },
         }
     ],
