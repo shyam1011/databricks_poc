@@ -3,6 +3,8 @@ import os
 
 server_hostname = os.getenv("DATABRICKS_HOST")
 access_token = os.getenv("DATABRICKS_TOKEN")
+http_path = os.getenv("DATABRICKS_HTTP_PATH")
+
 print("Databricks Host:", server_hostname)
 
 
@@ -37,12 +39,12 @@ job_settings = {
                 }
             ],
             "environment_variables": {
-                "DATABRICKS_HOST": os.getenv("DATABRICKS_HOST"),
-                "DATABRICKS_HTTP_PATH": os.getenv("DATABRICKS_HTTP_PATH"),
-                "DATABRICKS_TOKEN": os.getenv("DATABRICKS_TOKEN")
-            }
+                "DATABRICKS_HOST": server_hostname,
+                "DATABRICKS_HTTP_PATH": http_path,
+                "DATABRICKS_TOKEN": access_token 
+            },
         }
-    ]
+    ],
 }
 
 # Create the job
