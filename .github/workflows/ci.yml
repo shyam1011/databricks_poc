@@ -25,7 +25,21 @@ jobs:
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           poetry install
+      - name: Validate Databricks secrets
+        run: |
+          echo "🔍 Validating Databricks secrets..."
 
+          if [ -z "${DATABRICKS_HOST}" ]; then
+            echo "❌ DATABRICKS_HOST is not set"; exit 1;
+          fi
+          if [ -z "${DATABRICKS_TOKEN}" ]; then
+            echo "❌ DATABRICKS_TOKEN is not set"; exit 1;
+          fi
+          if [ -z "${DATABRICKS_HTTP_PATH}" ]; then
+            echo "❌ DATABRICKS_HTTP_PATH is not set"; exit 1;
+          fi
+
+          echo "✅ All Databricks secrets found"
       - name: Build .whl file
         run: |
           export PATH="$HOME/.local/bin:$PATH"
